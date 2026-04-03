@@ -69,7 +69,7 @@ def write_docs(
     extra_docs: Optional[dict[int, str]] = None,
     page_builder_classes: Optional[docs_for_object.PageBuilderDict] = None,
 ):
-  """Write extracted API documentation to disk.  This function generates markdown documentation files for each API symbol defined in the parser configuration. It also handles creation of auxiliary files such as table of contents (`_toc.yaml`), redirects (`_redirects.yaml`), and a global symbol index.  Each symbol is processed into a documentation page, resolving cross-references and optionally generating search metadata and API reports. """
+  """Write previously extracted docs to disk.
 
   Write a docs page for each symbol included in the indices of parser_config to
   a tree of docs at `output_dir`.
@@ -113,8 +113,7 @@ def write_docs(
 
   # Collect redirects for an api _redirects.yaml file.
   redirects = []
-  
-  # Optional report object used to collect API documentation metrics
+
   api_report = None
   if gen_report:
     api_report = utils.ApiReport()
@@ -221,7 +220,7 @@ def extract(
     ] = doc_generator_visitor.DocGeneratorVisitor,
     filters: Optional[public_api.ApiFilter] = None,
 ):
-  """Traverse module contents and return an index of discovered API objects.  This function walks through the given Python module, applies optional filters, and collects all public API symbols using the provided visitor class.  It builds and returns a structured index representing the module's API hierarchy, which is later used for documentation generation. """
+  """Walks the module contents, returns an index of all visited objects.
 
   The return value is an instance of `self._visitor_cls`, usually:
   `doc_generator_visitor.DocGeneratorVisitor`
@@ -256,7 +255,7 @@ EXCLUDED = set(['__init__.py', 'OWNERS', 'README.txt'])
 
 
 class DocGenerator:
-  """Main entry point for generating API documentation.  This class coordinates the extraction, parsing, and generation of documentation for a given Python module. It manages configuration, filters, and output structure to produce consistent API reference docs. """
+  """Main entry point for generating docs."""
 
   def __init__(
       self,
@@ -403,7 +402,7 @@ class DocGenerator:
     ]
 
   def run_extraction(self) -> config.ParserConfig:
-    """Traverse module contents and return an index of discovered API objects.  This function walks through the given Python module, applies optional filters, and collects all public API symbols using the provided visitor class.  It builds and returns a structured index representing the module's API hierarchy, which is later used for documentation generation. """
+    """Walks the module contents, returns an index of all visited objects.
 
     Returns:
         An instance of `parser_config.ParserConfig`.
