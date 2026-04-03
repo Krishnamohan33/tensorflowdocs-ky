@@ -360,7 +360,9 @@ def doc_private(obj: T) -> T:
   setattr(obj, _DOC_PRIVATE, None)
   return obj
 
-"""Check whether a private object should be documented.
+
+def should_doc_private(obj) -> bool:
+  """Check whether a private object should be documented.
 
 Args:
   obj: The object to check.
@@ -368,7 +370,6 @@ Args:
 Returns:
   True if the object is marked for documentation, otherwise False.
 """
-def should_doc_private(obj) -> bool:
   return hasattr(obj, _DOC_PRIVATE)
 
 
