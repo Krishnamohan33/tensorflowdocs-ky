@@ -27,6 +27,14 @@ def set_deprecated(obj: T) -> T:
 
 
 def is_deprecated(obj) -> bool:
+  """Check whether an object is marked as deprecated.
+
+  Args:
+    obj: The object to check.
+
+  Returns:
+    True if the object is marked as deprecated, otherwise False.
+  """
   return hasattr(obj, _DEPRECATED)
 
 
@@ -86,7 +94,14 @@ def set_custom_page_builder_cls(obj, cls):
 
 
 def get_custom_page_builder_cls(obj):
-  """Gets custom page content if available."""
+  """Return the custom page builder class for an object if set.
+
+Args:
+  obj: The object to inspect.
+
+Returns:
+  The custom page builder class if available, otherwise None.
+"""
   return getattr(obj, _CUSTOM_PAGE_BUILDER_CLS, None)
 
 
@@ -345,7 +360,14 @@ def doc_private(obj: T) -> T:
   setattr(obj, _DOC_PRIVATE, None)
   return obj
 
+"""Check whether a private object should be documented.
 
+Args:
+  obj: The object to check.
+
+Returns:
+  True if the object is marked for documentation, otherwise False.
+"""
 def should_doc_private(obj) -> bool:
   return hasattr(obj, _DOC_PRIVATE)
 
